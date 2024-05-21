@@ -8,6 +8,9 @@
       <sourceFolder url="file://$MODULE_DIR$/micro-service/tests" isTestSource="true" packagePrefix="App\Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/appS6/vendor/pdepend/pdepend" />
+      <excludeFolder url="file://$MODULE_DIR$/appS6/vendor/phpmd/phpmd" />
+      <excludeFolder url="file://$MODULE_DIR$/appS6/vendor/phpstan/phpstan" />
       <excludeFolder url="file://$MODULE_DIR$/appS6/vendor/squizlabs/php_codesniffer" />
     </content>
     <orderEntry type="inheritedJdk" />
