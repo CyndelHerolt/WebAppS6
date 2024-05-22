@@ -26,7 +26,7 @@ jobs:
         php-version: '8.2'
     - uses: actions/checkout@v3
     - name: move to project directory
-      run: cd /appS6
+      run: cd appS6
     - name: Copy .env.test.local
       run: php -r "file_exists('.env.local') || copy('.env.test', '.env.local');"
     - name: Cache Composer packages
