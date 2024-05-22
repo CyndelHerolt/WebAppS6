@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/pdf/download', name: 'app_pdf_download')]
 class PdfController extends AbstractController
 {
 
@@ -14,11 +15,11 @@ class PdfController extends AbstractController
     {
     }
 
-    #[Route('/pdf', name: 'app_pdf')]
+    #[Route('/url', name: 'app_pdf_url')]
     public function index(?string $url)
     {
         // appeler le service PdfRequestService pour générer le PDF à partir de l'URL
-        $pdfContent = $this->pdfRequestService->generatePdf($url);
+        $pdfContent = $this->pdfRequestService->generatePdfFromUrl($url);
 
         // enregistrer le contenu du PDF dans un fichier à la route définie dans le .env 'PDF_PATH'
         $filePath = $_ENV['PDF_STORAGE_PATH'];
