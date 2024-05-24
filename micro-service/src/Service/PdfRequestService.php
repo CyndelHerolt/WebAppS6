@@ -11,7 +11,7 @@ class PdfRequestService
     {
     }
 
-    public function generatePdf(?string $url)
+    public function generatePdfFromUrl(?string $url)
     {
         $response = $this->client->request(
             'GET',
