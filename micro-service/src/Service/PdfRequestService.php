@@ -18,12 +18,9 @@ class PdfRequestService
             $_ENV['GOTENBERG_URL'] . '/forms/chromium/convert/url',
             [
                 'headers' => [
-//                    'Accept' => 'application/pdf',
                     'Content-Type' => 'multipart/form-data',
                 ],
-                'body' => json_encode([
-                    'url' => $url
-                ])
+                'body' => ['url'=>$url]
             ]
         );
 
