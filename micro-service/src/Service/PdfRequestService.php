@@ -18,17 +18,22 @@ class PdfRequestService
             $_ENV['GOTENBERG_URL'] . '/forms/chromium/convert/url',
             [
                 'headers' => [
-                    'Accept' => 'application/pdf',
+//                    'Accept' => 'application/pdf',
+                    'Content-Type' => 'multipart/form-data',
                 ],
-                'body' => [
-                    'url' => $url,
-                    'webPage' => [
-                        'waitDelay' => 0.0
-                    ]
-                ]
+                'body' => json_encode([
+                    'url' => $url
+                ])
             ]
         );
 
+        // Renvoyer le contenu de la réponse
+
+        // vérifier si la réponse est un code d'erreur
+//        if ($response->getStatusCode() !== 200) {
+//            throw new \Exception($response->getContent());
+//        } else {
         return $response->getContent();
+//        }
     }
 }
