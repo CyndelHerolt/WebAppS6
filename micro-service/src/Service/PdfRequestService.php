@@ -14,26 +14,26 @@ class PdfRequestService
     public function generatePdfFromUrl(?string $url)
     {
         $response = $this->client->request(
-            'GET',
+            'POST',
             $_ENV['GOTENBERG_URL'] . '/forms/chromium/convert/url',
             [
                 'headers' => [
-                    'Accept' => 'application/json',
-                    'Content-Type' => 'multipart/form-data',
+                    'Accept' => 'application/pdf',
+                    'Content-Type' => 'application/json',
                 ],
-                'query' => [
+                'body' => json_encode([
                     'url' => $url
-                ]
+                ])
             ]
         );
 
         // Renvoyer le contenu de la réponse
 
         // vérifier si la réponse est un code d'erreur
-        if ($response->getStatusCode() !== 200) {
-            throw new \Exception('Erreur lors de la génération du PDF');
-        } else {
-            return $response->getContent();
-        }
+//        if ($response->getStatusCode() !== 200) {
+//            throw new \Exception($response->getContent());
+//        } else {
+        return $response->getContent();
+//        }
     }
 }
