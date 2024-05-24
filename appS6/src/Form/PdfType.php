@@ -21,11 +21,13 @@ class PdfType extends AbstractType
             ->add('title', TextType::class, [
                 'attr' => [
                     'placeholder' => 'Enter a title',
+                    'class' => 'form-control mb-3',
                 ],
             ])
             ->add('url', TextType::class, [
                 'attr' => [
                     'placeholder' => 'Enter a URL',
+                    'class' => 'form-control mb-3',
                 ],
             ])
 //            ->add('path')

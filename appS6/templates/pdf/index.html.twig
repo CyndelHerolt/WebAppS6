@@ -3,12 +3,20 @@
 {% block title %}Hello PdfController!{% endblock %}
 
 {% block body %}
-    <h1>Hello PdfController!</h1>
+    <h2>Générer un pdf à partir d'une url</h2>
 
-    {{ form_start(form) }}
-    {{ form_row(form.title) }}
-    {{ form_row(form.url) }}
+    <div class="col-lg-6 col-12">
+        {{ form_start(form) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.url) }}
 
-    <button type="submit">Send</button>
-    {{ form_end(form) }}
+        <button class="btn btn-primary" type="submit" data-turbo-action="replace" data-turbo-frame="form-result">
+            Générer
+        </button>
+        {{ form_end(form) }}
+    </div>
+
+    <turbo-frame id="form-result">
+        <p>Ici le resultat</p>
+    </turbo-frame>
 {% endblock %}
