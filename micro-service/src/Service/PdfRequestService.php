@@ -19,21 +19,16 @@ class PdfRequestService
             [
                 'headers' => [
                     'Accept' => 'application/pdf',
-                    'Content-Type' => 'application/json',
                 ],
-                'body' => json_encode([
-                    'url' => $url
-                ])
+                'body' => [
+                    'url' => $url,
+                    'webPage' => [
+                        'waitDelay' => 0.0
+                    ]
+                ]
             ]
         );
 
-        // Renvoyer le contenu de la réponse
-
-        // vérifier si la réponse est un code d'erreur
-//        if ($response->getStatusCode() !== 200) {
-//            throw new \Exception($response->getContent());
-//        } else {
         return $response->getContent();
-//        }
     }
 }
