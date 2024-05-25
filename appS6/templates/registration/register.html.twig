@@ -13,19 +13,19 @@
         {{ form_errors(registrationForm) }}
 
         {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        <div class="d-flex flex-column gap-3">
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Password'
+            }) }}
+            {{ form_row(registrationForm.agreeTerms) }}
 
-        <small>
-            Vous avez déjà un compte? <a href="{{ path('app_login') }}">Connectez-vous</a>
-        </small>
+            <button type="submit" class="btn btn-primary-color">S'inscrire</button>
 
-        <br>
-
-        <button type="submit" class="btn btn-primary">S'inscrire</button>
+            <small>
+                Vous avez déjà un compte? <a href="{{ path('app_login') }}">Connectez-vous</a>
+            </small>
+        </div>
         {{ form_end(registrationForm) }}
     </div>
 
