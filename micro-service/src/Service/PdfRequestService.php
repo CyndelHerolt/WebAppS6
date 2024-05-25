@@ -11,7 +11,7 @@ class PdfRequestService
     {
     }
 
-    public function generatePdfFromUrl(?string $url)
+    public function generatePdfFromUrl(string $url): string
     {
         $response = $this->client->request(
             'POST',
@@ -20,17 +20,12 @@ class PdfRequestService
                 'headers' => [
                     'Content-Type' => 'multipart/form-data',
                 ],
-                'body' => ['url'=>$url]
+                'body' => [
+                    'url' => $url
+                ]
             ]
         );
 
-        // Renvoyer le contenu de la réponse
-
-        // vérifier si la réponse est un code d'erreur
-//        if ($response->getStatusCode() !== 200) {
-//            throw new \Exception($response->getContent());
-//        } else {
         return $response->getContent();
-//        }
     }
 }
