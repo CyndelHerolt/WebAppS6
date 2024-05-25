@@ -19,7 +19,7 @@ class GeneratePdfController extends AbstractController
     {
     }
 
-    #[Route('/url', name: 'app_pdf_url')]
+    #[Route('/url', name: '_url')]
     public function index(Request $request): Response
     {
         $form = $this->createForm(PdfType::class);

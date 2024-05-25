@@ -1,6 +1,84 @@
-body {
-    background-color: #eaeaea;
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 50px;
+@import "vars";
+
+* {
+  box-sizing: border-box;
+  font-family: $font-family;
 }
+
+body {
+  background-color: $bg-color;
+  color: $font-color;
+}
+
+main {
+  margin: 0;
+  padding: 50px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 50px;
+  background-color: $quaternary-color;
+
+  .brand-name {
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: $bg-color;
+    padding: 5px 10px;
+  }
+
+  nav {
+    ul {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        margin: 0 10px;
+
+        a {
+          text-decoration: none;
+          color: $light-font-color;
+        }
+      }
+    }
+  }
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 50px;
+  background-color: $bg-color;
+}
+
+h1 {
+  color: $primary-color;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 5rem;
+}
+
+p {
+  color: $font-color;
+  font-size: 1.2rem;
+}
+
+a {
+  color: $primary-color; // couleur plus contrastée pour le texte du lien non survolé
+  &:hover {
+    color: $quinary-color; // couleur plus visible pour le texte du lien survolé
+  }
+}
+
+// Vous pouvez ajouter plus de styles en fonction des éléments présents dans votre HTML
