@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\Pdf;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class PdfGenerateRequestService
@@ -10,22 +11,21 @@ class PdfGenerateRequestService
     {
     }
 
-    public function requestToGeneratePdfFromUrl(?string $url): mixed
+    public function requestToGeneratePdfFromUrl(string $url): string
     {
         $response = $this->client->request(
-            'GET',
+            'POST',
             $_ENV['MICROSERVICE_URL'] . '/pdf/download/url',
             [
                 'headers' => [
-                    'Accept' => 'application/json',
-                    'Content-Type' => 'application/json',
+                    'Content-Type' => 'application/x-www-form-urlencoded',
                 ],
-                'query' => [
+                'body' => [
                     'url' => $url
                 ]
             ]
         );
 
-        return $response;
+        return $response->getContent();
     }
 }
