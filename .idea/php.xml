@@ -191,6 +191,7 @@
       <path value="$PROJECT_DIR$/micro-service/vendor/symfony/http-client-contracts" />
       <path value="$PROJECT_DIR$/micro-service/vendor/symfony/http-client" />
       <path value="$PROJECT_DIR$/appS6/vendor/symfonycasts/sass-bundle" />
+      <path value="$PROJECT_DIR$/appS6/vendor/symfonycasts/verify-email-bundle" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
