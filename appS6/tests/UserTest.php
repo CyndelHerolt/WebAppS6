@@ -25,7 +25,7 @@ class UserTest extends TestCase
             'firstname' => $firstname,
             'lastname' => $lastname,
             'password' => $password,
-            'role' => $role
+            'roles' => $role
         ];
 
         // Définition des setters via le tableau de données de test
