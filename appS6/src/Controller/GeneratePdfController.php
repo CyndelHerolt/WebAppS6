@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-#[Route('/pdf', name: 'app_pdf')]
+#[Route('/app/pdf', name: 'app_pdf')]
 class GeneratePdfController extends AbstractController
 {
     public function __construct(

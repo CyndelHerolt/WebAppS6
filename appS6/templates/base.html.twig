@@ -19,11 +19,23 @@
             <h1 class="brand-name">pdf-craft</h1>
         </a>
         <nav>
-            <ul>
-                <li><a href="{{ path('app_pdf_url') }}">Page web en pdf</a></li>
-                <li><a href="">Fusionner des PDF</a></li>
-                <li><a href="">Convertir un PDF</a></li>
-            </ul>
+{#      si un utilisateur est connecté      #}
+            {% if app.user %}
+                <ul>
+                    <li><a href="{{ path('app_pdf_url') }}">Page web en pdf</a></li>
+                    <li><a href="">Fusionner des PDF</a></li>
+                    <li><a href="">Convertir un PDF</a></li>
+                </ul>
+                <ul>
+                    <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+                </ul>
+{#      si un utilisateur n'est pas connecté      #}
+            {% else %}
+                <ul>
+                    <li><a href="{{ path('app_login') }}">Connexion</a></li>
+                    <li><a href="{{ path('app_register') }}">Inscription</a></li>
+                </ul>
+            {% endif %}
         </nav>
     </header>
 {% endblock %}
