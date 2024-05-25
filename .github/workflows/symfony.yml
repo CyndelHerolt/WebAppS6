@@ -47,7 +47,7 @@ jobs:
     - name: Execute migrations
       run: |
         cd appS6
-        php bin/console doctrine:make:migration
+        php bin/console make:migration
         php bin/console doctrine:migrations:migrate --no-interaction --env=test
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
