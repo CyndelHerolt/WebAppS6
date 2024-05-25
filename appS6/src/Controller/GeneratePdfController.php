@@ -8,11 +8,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 #[Route('/pdf', name: 'app_pdf')]
 class GeneratePdfController extends AbstractController
 {
-    public function __construct(private PdfGenerateRequestService $pdfGenerateRequestService)
+    public function __construct(
+        private PdfGenerateRequestService $pdfGenerateRequestService,
+    )
     {
     }
 
@@ -23,15 +26,20 @@ class GeneratePdfController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $url = $form->get('url')->getData();
+            $pdf = $form->getData();
+            $url = $pdf->getUrl();
 
-            // Call the service to generate the PDF
-            $pdf = $this->pdfGenerateRequestService->requestToGeneratePdfFromUrl($url);
+            // Appel du service PdfGenerateRequestService qui va envoyer l'url du PDF au micro-service
+            $pdfContent = $this->pdfGenerateRequestService->requestToGeneratePdfFromUrl($url);
 
-            dump($pdf->getContent());
+            // enregistrer le contenu du PDF dans un fichier dans le dossier pdf_repository de votre projet
+            $fileName = 'pdf_' . uniqid() . '.pdf';
+            $filePath = $_ENV['PDF_STORAGE_PATH'] . '/' . $fileName;
+            file_put_contents($filePath, $pdfContent);
 
             return $this->render('pdf/_pdf_result.html.twig', [
-                'url' => $pdf,
+                'url' => $url,
+                'path' => $_ENV['PDF_STORAGE_SRC'] . '/' . $fileName
             ]);
         }
 
