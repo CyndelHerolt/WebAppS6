@@ -50,6 +50,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Pdf::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $pdfs;
 
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    private ?Subscription $subscription = null;
+
     public function __construct()
     {
         $this->pdfs = new ArrayCollection();
@@ -192,6 +195,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $pdf->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSubscription(): ?Subscription
+    {
+        return $this->subscription;
+    }
+
+    public function setSubscription(?Subscription $subscription): static
+    {
+        $this->subscription = $subscription;
 
         return $this;
     }
