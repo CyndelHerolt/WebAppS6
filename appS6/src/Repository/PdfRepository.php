@@ -16,6 +16,35 @@ class PdfRepository extends ServiceEntityRepository
         parent::__construct($registry, Pdf::class);
     }
 
+    public function save(Pdf $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->persist($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    public function remove(Pdf $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->remove($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    // récupérer les PDFs d'un utilisateur
+    public function findByUser($user): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.user = :user')
+            ->setParameter('user', $user)
+            ->orderBy('p.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Pdf[] Returns an array of Pdf objects
     //     */

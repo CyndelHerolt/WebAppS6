@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -41,6 +43,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $lastname = null;
+
+    /**
+     * @var Collection<int, Pdf>
+     */
+    #[ORM\OneToMany(targetEntity: Pdf::class, mappedBy: 'user', orphanRemoval: true)]
+    private Collection $pdfs;
+
+    public function __construct()
+    {
+        $this->pdfs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -149,6 +162,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastname(?string $lastname): static
     {
         $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Pdf>
+     */
+    public function getPdfs(): Collection
+    {
+        return $this->pdfs;
+    }
+
+    public function addPdf(Pdf $pdf): static
+    {
+        if (!$this->pdfs->contains($pdf)) {
+            $this->pdfs->add($pdf);
+            $pdf->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePdf(Pdf $pdf): static
+    {
+        if ($this->pdfs->removeElement($pdf)) {
+            // set the owning side to null (unless already changed)
+            if ($pdf->getUser() === $this) {
+                $pdf->setUser(null);
+            }
+        }
 
         return $this;
     }

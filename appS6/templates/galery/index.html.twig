@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello GaleryController!{% endblock %}
+
+{% block main %}
+
+    <h1>Mes PDFs</h1>
+    <em>
+        Ici, vous retrouvez tous vos PDFs enregistrés sur notre site. Vous pouvez les consulter, les supprimer et les
+        télécharger.
+    </em>
+
+    <turbo-frame id="pdf-viewer">
+
+    </turbo-frame>
+    <section class="row m-auto d-flex flex-wrap justify-content-center gap-5 mt-5">
+        {% for pdf in pdfs %}
+            <div class="my_card col-lg-3 col-12">
+                <div class="card-banner">
+                    <iframe src="{{ asset(pdf.path) }}" width="100%" height="200px" aria-controls="none"></iframe>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        {{ pdf.title }}
+                    </h5>
+                    <small>
+                        créé le : {{ pdf.createdAt|date('d/m/Y H:i') }}
+                    </small>
+                    {% if pdf.url is not empty %}
+                        <br>
+                        <small>
+                            à partir de : <a href="{{ pdf.url }}" target="_blank">ce lien</a>
+                        </small>
+                    {% endif %}
+                    <br>
+                    <div class="card-footer">
+                        <button class="btn btn-primary-color">
+                            Ouvrir
+                        </button>
+                        <a href="{{ path('app_pdf_delete', {'id': pdf.id}) }}">
+                            <button class="btn btn-primary-color-outline">
+                                Supprimer
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
+
+{% endblock %}

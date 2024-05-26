@@ -15,21 +15,29 @@
 <body>
 {% block header %}
     <header>
-        <a href="{{ path('app_home') }}">
-            <h1 class="brand-name">pdf-craft</h1>
+        <a class="brand-name" href="{{ path('app_home') }}">
+            pdf-craft
         </a>
         <nav>
-{#      si un utilisateur est connecté      #}
+            {#      si un utilisateur est connecté      #}
             {% if app.user %}
+                <div class="dropdown">
+                    <button class="btn btn-secondary-color dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        Générer un PDF
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{{ path('app_pdf_url') }}">Page web en pdf</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </div>
                 <ul>
-                    <li><a href="{{ path('app_pdf_url') }}">Page web en pdf</a></li>
-                    <li><a href="">Fusionner des PDF</a></li>
-                    <li><a href="">Convertir un PDF</a></li>
-                </ul>
-                <ul>
+                    <li><a href="{{ path('app_account') }}">Mon compte</a></li>
+                    <li><a href="{{ path('app_galery') }}">Mes pdf</a></li>
                     <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
                 </ul>
-{#      si un utilisateur n'est pas connecté      #}
+                {#      si pas d'utilisateur connecté      #}
             {% else %}
                 <ul>
                     <li><a href="{{ path('app_login') }}">Connexion</a></li>
