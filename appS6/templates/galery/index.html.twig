@@ -13,6 +13,7 @@
     <turbo-frame id="pdf-viewer">
 
     </turbo-frame>
+
     <section class="row m-auto d-flex flex-wrap justify-content-center gap-5 mt-5">
         {% for pdf in pdfs %}
             <div class="my_card col-lg-3 col-12">
@@ -34,14 +35,67 @@
                     {% endif %}
                     <br>
                     <div class="card-footer">
-                        <button class="btn btn-primary-color">
+                        <button class="btn btn-primary-color" data-bs-toggle="modal"
+                                data-bs-target="#showPdfModal{{ pdf.id }}">
                             Ouvrir
                         </button>
-                        <a href="{{ path('app_pdf_delete', {'id': pdf.id}) }}">
-                            <button class="btn btn-primary-color-outline">
-                                Supprimer
+                        <button class="btn btn-primary-color-outline" data-bs-toggle="modal"
+                                data-bs-target="#deletePdfModal{{ pdf.id }}">
+                            Supprimer
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="deletePdfModal{{ pdf.id }}" tabindex="-1"
+                 aria-labelledby="deletePdfModal{{ pdf.id }}Label" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deletePdfModal{{ pdf.id }}Label">Supprimer un document</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                Êtes-vous sûr de vouloir supprimer le pdf "{{ pdf.title }}" ?
+                            </p>
+                            <div class="alert alert-danger text-danger text-center">Cette action est irréversible.</div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary-color" data-bs-dismiss="modal">Annuler
                             </button>
-                        </a>
+                            <a href="{{ path('app_pdf_delete', {'id': pdf.id}) }}">
+                                <button type="button" class="btn btn-primary-color-outline">Confirmer</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal modal-xl fade" id="showPdfModal{{ pdf.id }}" tabindex="-1"
+                 aria-labelledby="showPdfModal{{ pdf.id }}Label" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div>
+                                <h5 class="modal-title" id="showPdfModal{{ pdf.id }}Label">{{ pdf.title }}</h5>
+                                <small>créé le : {{ pdf.createdAt|date('d/m/Y H:i') }}</small>
+                                {% if pdf.url is not empty %}
+                                    <small>
+                                        à partir de : <a href="{{ pdf.url }}" target="_blank">ce lien</a>
+                                    </small>
+                                {% endif %}
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <iframe src="{{ asset(pdf.path) }}" width="100%" height="500px"
+                                    aria-controls="none"></iframe>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary-color" data-bs-dismiss="modal">Annuler
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
