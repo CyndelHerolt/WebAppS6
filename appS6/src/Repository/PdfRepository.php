@@ -34,6 +34,20 @@ class PdfRepository extends ServiceEntityRepository
         }
     }
 
+    public function countPdfGeneratedByUserOnDate($userId, $startOfDay, $endOfDay)
+    {
+
+        return $this->createQueryBuilder('p')
+            ->select('COUNT(p.id)')
+            ->where('p.user = :userId')
+            ->andWhere('p.created_at BETWEEN :startOfDay AND :endOfDay')
+            ->setParameter('userId', $userId)
+            ->setParameter('startOfDay', $startOfDay)
+            ->setParameter('endOfDay', $endOfDay)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     // récupérer les PDFs d'un utilisateur
     public function findByUser($user): array
     {
