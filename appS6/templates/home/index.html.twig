@@ -4,6 +4,9 @@
 
 
 {% block main %}
+    {% if app.user %}
+        <p>Vous êtes connecté en tant que {{ app.user.email }}</p>
+    {% endif %}
     <h1>pdf-craft</h1>
     <p>
         PDF Craft vous permet de générer et stocker des fichiers PDF à partir de plusieurs sources.
