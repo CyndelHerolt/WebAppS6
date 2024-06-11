@@ -16,6 +16,35 @@ class SubscriptionRepository extends ServiceEntityRepository
         parent::__construct($registry, Subscription::class);
     }
 
+    public function save(Subscription $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->persist($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    public function remove(Subscription $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->remove($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    // récupérer la valeur de pdf_limit d'un utilisateur
+    public function getMaxPdfByUser($user): int
+    {
+        return $this->createQueryBuilder('s')
+            ->select('s.pdf_limit')
+            ->where('s.user = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     //    /**
     //     * @return Subscription[] Returns an array of Subscription objects
     //     */

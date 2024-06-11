@@ -14,6 +14,10 @@
       <excludeFolder url="file://$MODULE_DIR$/appS6/vendor/phpstan/phpstan" />
       <excludeFolder url="file://$MODULE_DIR$/appS6/vendor/squizlabs/php_codesniffer" />
       <excludeFolder url="file://$MODULE_DIR$/appS6/vendor/symfonycasts/verify-email-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/appS6/vendor/doctrine/data-fixtures" />
+      <excludeFolder url="file://$MODULE_DIR$/appS6/vendor/doctrine/doctrine-fixtures-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/appS6/vendor/symfony/ux-icons" />
+      <excludeFolder url="file://$MODULE_DIR$/appS6/vendor/symfony/ux-twig-component" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

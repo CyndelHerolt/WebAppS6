@@ -19,6 +19,14 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         parent::__construct($registry, User::class);
     }
 
+    public function save(User $user, bool $flush = false): void
+    {
+        $this->getEntityManager()->persist($user);
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
      */
@@ -31,6 +39,18 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $user->setPassword($newHashedPassword);
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
+    }
+
+    // récupérer la valeur de subscription.pdf_limit d'un utilisateur
+    public function getMaxPdfByUser($user): int
+    {
+        return $this->createQueryBuilder('u')
+            ->select('s.pdf_limit')
+            ->leftJoin('u.subscription', 's')
+            ->where('u = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
     //    /**

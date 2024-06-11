@@ -1,4 +1,12 @@
 <turbo-frame id="form-result">
+    {#  affichage des flash messages  #}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
     <p>{{ url }}</p>
 
     <iframe src="{{ path }}" width="100%" height="600"></iframe>
