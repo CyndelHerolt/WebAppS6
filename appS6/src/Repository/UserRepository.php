@@ -41,6 +41,18 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->flush();
     }
 
+    // récupérer la valeur de subscription.pdf_limit d'un utilisateur
+    public function getMaxPdfByUser($user): int
+    {
+        return $this->createQueryBuilder('u')
+            ->select('s.pdf_limit')
+            ->leftJoin('u.subscription', 's')
+            ->where('u = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     //    /**
     //     * @return User[] Returns an array of User objects
     //     */
